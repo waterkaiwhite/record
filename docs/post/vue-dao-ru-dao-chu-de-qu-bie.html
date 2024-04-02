@@ -77,9 +77,11 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h2>import xxx from "path"</h2>
 <p>用于导入模块的默认导出。每个模块只能有一个默认导出，使用此语法时不需要花括号。<br>
 例如，如果模块path有一个默认导出（如export default function() {}或export default class {}），可以使用import xxx from "path"来导入这个默认导出，其中xxx是这个导入的本地名称。</p>
+<h2>import type xxx或{xxx} from "path"</h2>
+<p>用于导入接口类型</p>
 <h2>关于export</h2>
 <p>export default xxx: 这是ES6模块化规范中用于指定模块的默认导出的关键字。每个模块只能有一个默认导出。默认导出可以是一个函数、类、对象或任何其他有效的JavaScript表达式。<strong>导入时，可以使用任意名称来引入</strong>。</p>
-<p>export const/function/class/type: 分别用于导出常量，函数，类和类型别名，使它们可以在其他模块中被导入和使用。</p></div>
+<p>export const/function/class/interface/type: 分别用于导出常量，函数，类，接口和类型别名，使它们可以在其他模块中被导入和使用。</p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
 <div class="comments" id="comments"></div>
