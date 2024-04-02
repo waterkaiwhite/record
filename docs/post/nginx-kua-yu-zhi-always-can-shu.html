@@ -9,8 +9,8 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="random use">
-<title>random use</title>
+<meta name="description" content="nginx跨域之always参数">
+<title>nginx跨域之always参数</title>
 
 
 </head>
@@ -41,7 +41,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
 <body>
     <div id="header">
-<h1 class="postTitle">random use</h1>
+<h1 class="postTitle">nginx跨域之always参数</h1>
 <div class="title-right">
     
     <a href="https://waterkaiwhite.github.io/record"><button id="buttonHome" class="btn btn-invisible circle" title="首页">
@@ -51,7 +51,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     </button></a>
 
     
-    <a href="https://github.com/waterkaiwhite/record/issues/1" target="_blank"><button class="btn btn-invisible circle" title="Issue">
+    <a href="https://github.com/waterkaiwhite/record/issues/3" target="_blank"><button class="btn btn-invisible circle" title="Issue">
         <svg class="octicon" width="16" height="16">
             <path id="pathIssue" fill-rule="evenodd"></path>
         </svg>
@@ -67,13 +67,20 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><p>1.random<br>
-2.randint/randrange<br>
-3.uniform<br>
-4.shuffle<br>
-5.choices<br>
-6.seed<br>
-7.sample</p></div>
+<div class="markdown-body" id="postBody"><p>nginx配置了Access-Control-Allow-Origin，服务端响应码200时，前端无跨域问题，响应非200时出现跨域问题。</p>
+<p>原因：<br>
+Nginx只会在成功的响应（如200状态码）中添加额外的头信息，对于错误响应（如401、403等），这些头信息可能不会被添加。</p>
+<p>要在所有响应中添加所需的跨域头，可以通过在Nginx的配置文件中使用always参数来实现，always参数确保无论响应代码如何，头信息都会被添加。如下：</p>
+<pre class="notranslate"><code class="notranslate">location / {
+    add_header 'Access-Control-Allow-Origin' '*' always;
+    add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS' always;
+    add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization' always;
+    if ($request_method = 'OPTIONS') {
+        return 204;
+    }
+}
+</code></pre>
+<p>另外，要特别注意，使用*作为Access-Control-Allow-Origin的值时，不能与Access-Control-Allow-Credentials为true一起使用，因为这违反了CORS策略。如果需要携带凭证（如Cookies），则必须指定明确的域名而不是*。</p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
 <div class="comments" id="comments"></div>
