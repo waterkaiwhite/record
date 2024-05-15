@@ -9,7 +9,14 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="el-menu点一个菜单，同时出现多个子菜单问题">
+<meta name="description" content="根本原因：多个子菜单使用了相同的index，被认为是同一个菜单
+间接原因：路由设置的path值相同，又使用了item.path作为el-menu-item的index，导致菜单的index相同。">
+<meta property="og:title" content="el-menu点一个菜单，同时出现多个子菜单问题">
+<meta property="og:description" content="根本原因：多个子菜单使用了相同的index，被认为是同一个菜单
+间接原因：路由设置的path值相同，又使用了item.path作为el-menu-item的index，导致菜单的index相同。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://waterkaiwhite.github.io/record/post/el-menu-dian-yi-ge-cai-dan-%EF%BC%8C-tong-shi-chu-xian-duo-ge-zi-cai-dan-wen-ti.html">
+<meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
 <title>el-menu点一个菜单，同时出现多个子菜单问题</title>
 
 

@@ -9,7 +9,18 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="selenium 显式等待问题">
+<meta name="description" content="1.查找同属性的元素，使用EC.queryall失效，因为有些元素过一会而儿才出来
+解决：循环获取，直到元素列表的长度达到符合的值
+2.使用显式等待找到了元素，直接使用get attribute方法获取其属性值，可能碰到元素stale问题，就是虽然这个元素创建了，但是其属性值可能还需要等js运行后才设置
+解决：循环获取属性值，但是需要捕获异常，直到无异常时能够成功获取该属性值。">
+<meta property="og:title" content="selenium 显式等待问题">
+<meta property="og:description" content="1.查找同属性的元素，使用EC.queryall失效，因为有些元素过一会而儿才出来
+解决：循环获取，直到元素列表的长度达到符合的值
+2.使用显式等待找到了元素，直接使用get attribute方法获取其属性值，可能碰到元素stale问题，就是虽然这个元素创建了，但是其属性值可能还需要等js运行后才设置
+解决：循环获取属性值，但是需要捕获异常，直到无异常时能够成功获取该属性值。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://waterkaiwhite.github.io/record/post/selenium%20-xian-shi-deng-dai-wen-ti.html">
+<meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
 <title>selenium 显式等待问题</title>
 
 
